@@ -24,7 +24,8 @@
         <!-- .toUpperCase is JavaScript Expression -->
         <h1 v-once>Hey {{member.name.toUpperCase()}}! What is Vue.js</h1>
         <!--  {{isActive ? "is super" : "not super"}} is Javascript Expression. if true will show "is super",  if false will show "not super" -->
-        <p>The progressive JavaScript Framework {{isActive ? "is super" : "not super"}}</p>
+        <!-- {{getName()}} is calling declaration method -->
+        <p>The progressive JavaScript Framework {{isActive ? "is super" : "not super"}} {{getName()}}</p>
       </header>
       <footer id="footer">
         <!--  {{"20" + "22"}}  JavaScript Expression, Whetere string or int or another type-->
@@ -35,7 +36,7 @@
     <script>
       const member = {
         // String, number, boolean, array, object
-        name: "Doremi Fasolasido",
+        name: "Zaenury Adhiim",
         message: "Hello World",
         isActive: true,
       };
@@ -43,6 +44,12 @@
       const vm = new Vue({
         el: "#app",
         data: member,
+        // Method JavaScript
+        methods: {
+          getName: function () {
+            return "Ya, " + this.name;
+          },
+        },
       });
     </script>
   </body>
