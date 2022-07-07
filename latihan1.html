@@ -21,11 +21,14 @@
         <img src="./image/logo.svg" width="90" />
         <!-- {{}}  is Binding Expression / Interpolation / Syntax Template.-->
         <!-- v-once digunakan agar Binding Expression di dalamnya tidak bisa diubah.  -->
-        <h1 v-once>Hey {{member.name}}! What is Vue.js</h1>
-        <p>The progressive JavaScript Framework</p>
+        <!-- .toUpperCase is JavaScript Expression -->
+        <h1 v-once>Hey {{member.name.toUpperCase()}}! What is Vue.js</h1>
+        <!--  {{isActive ? "is super" : "not super"}} is Javascript Expression. if true will show "is super",  if false will show "not super" -->
+        <p>The progressive JavaScript Framework {{isActive ? "is super" : "not super"}}</p>
       </header>
       <footer id="footer">
-        <p>Copyright 2022</p>
+        <!--  {{"20" + "22"}}  JavaScript Expression, Whetere string or int or another type-->
+        <p>Copyright {{"20" + "22"}}</p>
       </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
@@ -34,6 +37,7 @@
         // String, number, boolean, array, object
         name: "Doremi Fasolasido",
         message: "Hello World",
+        isActive: true,
       };
 
       const vm = new Vue({
