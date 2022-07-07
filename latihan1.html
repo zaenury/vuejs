@@ -22,7 +22,9 @@
         <!-- {{}}  is Binding Expression / Interpolation / Syntax Template.-->
         <!-- v-once digunakan agar Binding Expression di dalamnya tidak bisa diubah.  -->
         <!-- .toUpperCase is JavaScript Expression -->
-        <h1 v-once>Hey {{member.name.toUpperCase()}}! What is Vue.js</h1>
+        <h1 v-once>Hey {{name.toUpperCase()}}! What is Vue.js</h1>
+        <!-- When call function(parameter). so we must filling something inside to () -->
+        <h2>{{changeName("Musyafa")}}</h2>
         <!--  {{isActive ? "is super" : "not super"}} is Javascript Expression. if true will show "is super",  if false will show "not super" -->
         <!-- {{getName()}} is calling declaration method -->
         <p>The progressive JavaScript Framework {{isActive ? "is super" : "not super"}} {{getName()}}</p>
@@ -34,20 +36,23 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
     <script>
-      const member = {
-        // String, number, boolean, array, object
-        name: "Zaenury Adhiim",
-        message: "Hello World",
-        isActive: true,
-      };
-
       const vm = new Vue({
         el: "#app",
-        data: member,
+        data: {
+          // String, number, boolean, array, object
+          name: "Zaenury Adhiim",
+          message: "Hello World",
+          isActive: true,
+        },
         // Method JavaScript
         methods: {
           getName: function () {
             return "Ya, " + this.name;
+          },
+          // function (newName) is Parameter from function
+          changeName: function (newName) {
+            this.name = newName;
+            return this.getName();
           },
         },
       });
