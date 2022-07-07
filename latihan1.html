@@ -27,6 +27,8 @@
         <h2>{{changeName("Musyafa")}}</h2>
         <!-- Implementation from computed property. call it like function but without using () -->
         <h3>{{getCompleteName}} {{totalPayment}}</h3>
+        <!-- Call ternary operator on computed property -->
+        <h4>{{bilangan + isBilanganAsli}}</h4>
         <!--  {{isActive ? "is super" : "not super"}} is Javascript Expression. if true will show "is super",  if false will show "not super" -->
         <!-- {{getName()}} is calling declaration method -->
         <p>The progressive JavaScript Framework {{isActive ? "is super" : "not super"}} {{getName()}}</p>
@@ -48,6 +50,7 @@
           namaDepan: "Rain",
           namaBelakang: "Fallin",
           qty: 1,
+          bilangan: 3,
         },
         // Method JavaScript
         methods: {
@@ -67,6 +70,10 @@
           },
           getCompleteName: function () {
             return this.namaDepan + this.namaBelakang;
+          },
+          // try computed with ternary operator
+          isBilanganAsli: function () {
+            return this.bilangan % 2 === 0 ? " Adalah bilangan genap" : " Adalah bilangan ganjil";
           },
         },
       });
