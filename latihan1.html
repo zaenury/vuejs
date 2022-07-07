@@ -19,7 +19,9 @@
     <div id="app">
       <header>
         <img src="./image/logo.svg" width="90" />
-        <h1>What is Vue.js</h1>
+        <!-- {{}}  is Binding Expression / Interpolation / Syntax Template.-->
+        <!-- v-once digunakan agar Binding Expression di dalamnya tidak bisa diubah.  -->
+        <h1 v-once>Hey {{member.name}}! What is Vue.js</h1>
         <p>The progressive JavaScript Framework</p>
       </header>
       <footer id="footer">
