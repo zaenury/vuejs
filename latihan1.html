@@ -18,11 +18,16 @@
   <body>
     <div id="app">
       <header>
-        <img src="./image/logo.svg" width="90" />
+        <img src="image/logo.svg" width="90" />
         <!-- {{}}  is Binding Expression / Interpolation / Syntax Template.-->
         <!-- v-once adalah directive yang digunakan agar Binding Expression di dalamnya tidak bisa diubah.  -->
         <!-- .toUpperCase is JavaScript Expression -->
         <h1 v-once>Hey {{name.toUpperCase()}}! What is Vue.js</h1>
+        <!-- How to call image (1) <img src="image/vuejs.png" alt="gambar" width="500" /> -->
+        <!-- Cannot use binding like this <img src="{{gambar}}" alt="gambar" width="500" /> -->
+        <!-- Another step tu call image (2) <img v-bind:src="gambar" alt="gambar" width="500" /> -->
+        <!-- Shortcut from v-bind:src is :src -->
+        <img :src="gambar" alt="gambar" width="500" />
         <!-- When call function(parameter). so we must filling something inside to () -->
         <h2>{{changeName("Musyafa")}}</h2>
         <!-- Implementation from computed property. call it like function but without using () -->
@@ -30,7 +35,7 @@
         <!-- Call ternary operator on computed property -->
         <h4>{{bilangan + isBilanganAsli}}</h4>
         <!-- Implement directive v-text from vuejs and call property "message" -->
-        <h5 v-text="message.toUpperCase()"></h5>
+        <h5 v-text="message"></h5>
         <!-- Implement directive v-html from vuejs and call property "link " -->
         <h5 v-html="link"></h5>
         <!--  {{isActive ? "is super" : "not super"}} is Javascript Expression. if true will show "is super",  if false will show "not super" -->
@@ -56,6 +61,7 @@
           qty: 1,
           bilangan: 3,
           link: '<a href="">Ini contoh html</a>',
+          gambar: "image/vuejs.png",
         },
         // Method JavaScript
         methods: {
