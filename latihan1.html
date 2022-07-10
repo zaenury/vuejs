@@ -31,6 +31,12 @@
         <h2>{{anotherName}}</h2>
         <!-- v-model is two way data binding. So we can change value what we declared on data of vuejs -->
         <p><input type="text" v-model="anotherName" /></p>
+        <ul>
+          <!-- v=for is iteartion. we can write with in or of-->
+          <!-- <li v-for="item in kelas">{{item}}</li> -->
+          <!-- Another alternative from {{}} is Binding Expression, we can use v-text for showing text -->
+          <li v-for="item in kelas" v-text="item"></li>
+        </ul>
         <p>{{kelas}}</p>
         <p><input type="checkbox" value="Vuejs" v-model="kelas" />Vuejs <input type="checkbox" value="Reactjs" v-model="kelas" />Reactjs <input type="checkbox" value="Nextjs" v-model="kelas" />Nextjs</p>
         <!-- How to call image (1) <img src="image/vuejs.png" alt="gambar" width="500" /> -->
