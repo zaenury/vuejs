@@ -13,6 +13,11 @@
         margin: 5%;
         font-family: "Quicksand", sans-serif;
       }
+      .active {
+        background: rgb(63, 178, 249);
+        border: 0;
+        padding: 5px;
+      }
     </style>
   </head>
   <body>
@@ -33,6 +38,11 @@
           <!-- v-on:click is an events javascript. addBilangan is handle. and it is mehtod what we declared bellow->
           <!-- @click same shorthand from  v-on:click. We can do another like this with @doubleClick. @input. @onSubmit. dll -->
           <button @click="addBilangan()">Tekan</button>
+        </p>
+        <p>
+          <button v-bind:class="{active: menu === 'home'}" v-on:click="menu = 'home'">Home</button>
+          <button v-bind:class="{active: menu === 'about'}" v-on:click="menu = 'about'">About</button>
+          <button v-bind:class="{active: menu === 'blog'}" v-on:click="menu = 'blog'">Blog</button>
         </p>
         <!-- When call function(parameter). so we must filling something inside to () -->
         <h2>{{changeName("Musyafa")}}</h2>
@@ -68,6 +78,7 @@
           bilangan: 0,
           link: '<a href="">Ini contoh html</a>',
           gambar: "image/vuejs.png",
+          menu: "home",
         },
         // Method JavaScript
         methods: {
