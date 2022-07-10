@@ -1,3 +1,3 @@
 # vuejs
 
-My history of writing code from vuejs
+My history of writing vuejs code
