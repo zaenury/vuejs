@@ -1,2 +1,3 @@
-# vue-fundamentals
-The pleasure of learning vuejs
+# vuejs
+
+My history of writing code from vuejs
