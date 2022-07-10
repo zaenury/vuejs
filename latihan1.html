@@ -28,6 +28,11 @@
         <!-- v-once adalah directive yang digunakan agar Binding Expression di dalamnya tidak bisa diubah.  -->
         <!-- .toUpperCase is JavaScript Expression -->
         <h1 v-once>Hey {{name.toUpperCase()}}! What is Vue.js</h1>
+        <h2>{{anotherName}}</h2>
+        <!-- v-model is two way data binding. So we can change value what we declared on data of vuejs -->
+        <p><input type="text" v-model="anotherName" /></p>
+        <p>{{kelas}}</p>
+        <p><input type="checkbox" value="Vuejs" v-model="kelas" />Vuejs <input type="checkbox" value="Reactjs" v-model="kelas" />Reactjs <input type="checkbox" value="Nextjs" v-model="kelas" />Nextjs</p>
         <!-- How to call image (1) <img src="image/vuejs.png" alt="gambar" width="500" /> -->
         <!-- Cannot use binding like this <img src="{{gambar}}" alt="gambar" width="500" /> -->
         <!-- Another step tu call image (2) <img v-bind:src="gambar" alt="gambar" width="500" /> -->
@@ -70,6 +75,7 @@
         data: {
           // String, number, boolean, array, object
           name: "Zaenury Adhiim",
+          anotherName: "Zentzy",
           message: "Hello World",
           isActive: true,
           namaDepan: "Rain",
@@ -79,6 +85,7 @@
           link: '<a href="">Ini contoh html</a>',
           gambar: "image/vuejs.png",
           menu: "home",
+          kelas: [],
         },
         // Method JavaScript
         methods: {
