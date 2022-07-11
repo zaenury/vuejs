@@ -40,7 +40,9 @@
           <!-- Function can be use inside v-for -->
           <li v-for="x in cariBilanganGenap(numbers)">{{x}}</li>
         </ul>
-        <ul>
+        <h3>Daftar kelas {{kelas.length}}</h3>
+        <!-- Conditional Rendering with v-if -->
+        <ul v-if="kelas.length >= 2">
           <!-- v=for is iteartion. we can write with in or of-->
           <!-- <li v-for="item in kelas">{{item}}</li> -->
           <!-- Another alternative from {{}} is Binding Expression, we can use v-text for showing text -->
