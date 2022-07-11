@@ -42,16 +42,18 @@
         </ul>
         <h3>Daftar kelas {{kelas.length}}</h3>
         <!-- Conditional Rendering with v-if -->
-        <ul v-if="kelas.length >= 2">
+        <ul v-if="kelas.length > 0">
           <!-- v=for is iteartion. we can write with in or of-->
           <!-- <li v-for="item in kelas">{{item}}</li> -->
           <!-- Another alternative from {{}} is Binding Expression, we can use v-text for showing text -->
-          <li v-for="item in kelas" v-text="item"></li>
+          <!-- <li v-for="item in kelas" v-text="item"></li> -->
           <!-- Access index from iteration -->
           <li v-for="(x, index) in kelas">{{index+1}} - {{x}}</li>
         </ul>
-        <p>{{kelas}}</p>
+        <!-- v-else must be sibling with v-if. And dont sparate with another tag <div></div> -->
+        <li v-else>Class is not available</li>
         <p><input type="checkbox" value="Vuejs" v-model="kelas" />Vuejs <input type="checkbox" value="Reactjs" v-model="kelas" />Reactjs <input type="checkbox" value="Nextjs" v-model="kelas" />Nextjs</p>
+        <p>{{kelas}}</p>
         <!-- How to call image (1) <img src="image/vuejs.png" alt="gambar" width="500" /> -->
         <!-- Cannot use binding like this <img src="{{gambar}}" alt="gambar" width="500" /> -->
         <!-- Another step tu call image (2) <img v-bind:src="gambar" alt="gambar" width="500" /> -->
