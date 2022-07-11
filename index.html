@@ -35,11 +35,17 @@
         <ul>
           <li v-for="x in 5">{{x}}</li>
         </ul>
+        <h3>Cari Bilangan genap dari {{numbers}}</h3>
+        <ul>
+          <!-- Function can be use inside v-for -->
+          <li v-for="x in cariBilanganGenap(numbers)">{{x}}</li>
+        </ul>
         <ul>
           <!-- v=for is iteartion. we can write with in or of-->
           <!-- <li v-for="item in kelas">{{item}}</li> -->
           <!-- Another alternative from {{}} is Binding Expression, we can use v-text for showing text -->
           <li v-for="item in kelas" v-text="item"></li>
+          <!-- Access index from iteration -->
           <li v-for="(x, index) in kelas">{{index+1}} - {{x}}</li>
         </ul>
         <p>{{kelas}}</p>
@@ -97,6 +103,7 @@
           gambar: "image/vuejs.png",
           menu: "home",
           kelas: [],
+          numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         },
         // Method JavaScript
         methods: {
@@ -111,6 +118,9 @@
           addBilangan: function () {
             this.bilangan++;
             this.bilangan % 2 === 0 ? (this.gambar = "image/vuejs.png") : (this.gambar = "image/vuejs2.png");
+          },
+          cariBilanganGenap: function (data) {
+            return data.filter((angka) => angka % 2 == 0);
           },
         },
         // Computed property, nilai properti tergantung pada properti lain. Contoh property qty pada marketplace
