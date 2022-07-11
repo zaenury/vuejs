@@ -31,11 +31,16 @@
         <h2>{{anotherName}}</h2>
         <!-- v-model is two way data binding. So we can change value what we declared on data of vuejs -->
         <p><input type="text" v-model="anotherName" /></p>
+        <h3>Iterasi v-for (1-5)</h3>
+        <ul>
+          <li v-for="x in 5">{{x}}</li>
+        </ul>
         <ul>
           <!-- v=for is iteartion. we can write with in or of-->
           <!-- <li v-for="item in kelas">{{item}}</li> -->
           <!-- Another alternative from {{}} is Binding Expression, we can use v-text for showing text -->
           <li v-for="item in kelas" v-text="item"></li>
+          <li v-for="(x, index) in kelas">{{index+1}} - {{x}}</li>
         </ul>
         <p>{{kelas}}</p>
         <p><input type="checkbox" value="Vuejs" v-model="kelas" />Vuejs <input type="checkbox" value="Reactjs" v-model="kelas" />Reactjs <input type="checkbox" value="Nextjs" v-model="kelas" />Nextjs</p>
