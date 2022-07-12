@@ -88,9 +88,10 @@
           <button @click="addBilangan()">Tekan</button>
         </p>
         <p>
-          <button v-bind:class="{active: menu === 'home'}" v-on:click="menu = 'home'">Home</button>
-          <button v-bind:class="{active: menu === 'about'}" v-on:click="menu = 'about'">About</button>
-          <button v-bind:class="{active: menu === 'blog'}" v-on:click="menu = 'blog'">Blog</button>
+          <!-- $event is access the original DOM event in an inline statement handler -->
+          <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click="getMenu('home', $event)">Home</a>
+          <a v-bind:class="{active: menu === 'about'}" href="#" v-on:click="getMenu('about', $event)">About</a>
+          <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click="getMenu('blog', $event)">Blog</a>
         </p>
         <!-- When call function(parameter). so we must filling something inside to () -->
         <h2>{{changeName("Musyafa")}}</h2>
@@ -163,6 +164,11 @@
             if (event) {
               alert(event.target.tagName);
             }
+          },
+          getMenu: function (data, event) {
+            // Event modifiers
+            event.preventDefault();
+            return (this.menu = data);
           },
         },
         // Computed property, nilai properti tergantung pada properti lain. Contoh property qty pada marketplace
