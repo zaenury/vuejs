@@ -60,7 +60,7 @@
         </ul>
         <label for="update kelas">Please, add class here</label>
         <!-- Using Key Modifier with .enter to run updateKelas without () -->
-        <p><input type="text" v-on:keyup.enter="updateKelas" /></p>
+        <p><input type="text" v-on:keyup.enter="updateKelas" v-model="kelasBaru" /></p>
         <h3>Daftar kelas {{kelas.length}}</h3>
         <!-- Conditional Rendering with v-if -->
         <!-- We can use v-show like v-if. But v-if totally remove elements. And v-show just display: none. Another thing, can't use v-else with v-show -->
@@ -142,6 +142,7 @@
             prodi: "Teknik Informatika",
             district: "Jember",
           },
+          kelasBaru: "",
         },
         // Method JavaScript
         methods: {
@@ -178,10 +179,17 @@
           getMenu: function (data) {
             return (this.menu = data);
           },
-          updateKelas: function (event) {
-            let update = event.target.value;
-            this.kelas.push(update);
-            event.target.value = "";
+          // updateKelas: function (event) {
+          //   let update = event.target.value;
+          // .push is fill an array to the last of index
+          //   this.kelas.push(update);
+          //   event.target.value = "";
+          // },
+          // another way for updateKelas
+          updateKelas: function () {
+            // .unshift is fill an array to the first of index
+            this.kelas.unshift(this.kelasBaru);
+            this.kelasBaru = "";
           },
         },
         // Computed property, nilai properti tergantung pada properti lain. Contoh property qty pada marketplace
