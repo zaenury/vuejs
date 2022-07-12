@@ -42,8 +42,14 @@
         template: `
         <header>
           <img src="image/logo.svg" width="90" />
-          <p>Vuejs is super</p>
+          <p v-text="pesan"></p>
         </header>`,
+        // Data component must be function
+        data: function () {
+          return {
+            pesan: "Hello Vuejs",
+          };
+        },
       });
       Vue.component("footer-component", {
         template: `
