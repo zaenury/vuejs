@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width= , initial-scale=1.0" />
+    <title>Vue Beginners</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        margin: 5%;
+        font-family: "Quicksand", sans-serif;
+      }
+      .active {
+        background: rgb(63, 178, 249);
+        border: 0;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <header-component></header-component>
+      <main>
+        <label for="update kelas">Please, add class here</label>
+        <p><input type="text" v-on:keyup.enter="updateKelas" v-model="kelasBaru" /></p>
+        <h3>Daftar kelas {{kelas.length}}</h3>
+        <template v-if="kelas.length > 0">
+          <ul>
+            <li v-for="(x, index) in kelas">{{index+1}} - {{x}}</li>
+          </ul>
+        </template>
+        <li v-else>Class is not available</li>
+      </main>
+      <footer-component></footer-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
+    <script>
+      Vue.component("header-component", {
+        template: `
+        <header>
+          <img src="image/logo.svg" width="90" />
+          <p>Vuejs is super</p>
+        </header>`,
+      });
+      Vue.component("footer-component", {
+        template: `
+        <footer id="footer">
+          <p>Copyright 2022. Zaenury Adhiim</p>
+        </footer>`,
+      });
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          kelas: [],
+          kelasBaru: "",
+        },
+        methods: {
+          updateKelas: function () {
+            // .unshift is fill an array to the first of index
+            this.kelas.unshift(this.kelasBaru);
+            this.kelasBaru = "";
+          },
+        },
+        computed: {},
+      });
+    </script>
+  </body>
+</html>
