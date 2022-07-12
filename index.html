@@ -89,9 +89,11 @@
         </p>
         <p>
           <!-- $event is access the original DOM event in an inline statement handler -->
-          <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click="getMenu('home', $event)">Home</a>
-          <a v-bind:class="{active: menu === 'about'}" href="#" v-on:click="getMenu('about', $event)">About</a>
-          <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click="getMenu('blog', $event)">Blog</a>
+          <!-- <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click="getMenu('home', $event)">Home</a> -->
+          <!-- With event modifier. ex: .prevent, we dont need put $event & declare event.preventDefault() in method anymore -->
+          <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click.prevent="getMenu('home')">Home</a>
+          <a v-bind:class="{active: menu === 'about'}" href="#" v-on:click.prevent="getMenu('about')">About</a>
+          <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click.prevent="getMenu('blog')">Blog</a>
         </p>
         <!-- When call function(parameter). so we must filling something inside to () -->
         <h2>{{changeName("Musyafa")}}</h2>
@@ -165,9 +167,12 @@
               alert(event.target.tagName);
             }
           },
-          getMenu: function (data, event) {
-            // Event modifiers
-            event.preventDefault();
+          // getMenu: function (data, event) {
+          //   // Event modifiers
+          //   event.preventDefault();
+          //   return (this.menu = data);
+          // },
+          getMenu: function (data) {
             return (this.menu = data);
           },
         },
