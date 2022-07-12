@@ -42,6 +42,7 @@
         </ul>
         <h3>Daftar kelas {{kelas.length}}</h3>
         <!-- Conditional Rendering with v-if -->
+        <!-- We can use v-show like v-if. But v-if totally remove elements. And v-show just display: none. Another thing, can't use v-else with v-show -->
         <ul v-if="kelas.length > 0">
           <!-- v=for is iteartion. we can write with in or of-->
           <!-- <li v-for="item in kelas">{{item}}</li> -->
