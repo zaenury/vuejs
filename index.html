@@ -58,6 +58,9 @@
           <!-- Function can be use inside v-for -->
           <li v-for="x in cariBilanganGenap(numbers)">{{x}}</li>
         </ul>
+        <label for="update kelas">Please, add class here</label>
+        <!-- Using Key Modifier with .enter to run updateKelas without () -->
+        <p><input type="text" v-on:keyup.enter="updateKelas" /></p>
         <h3>Daftar kelas {{kelas.length}}</h3>
         <!-- Conditional Rendering with v-if -->
         <!-- We can use v-show like v-if. But v-if totally remove elements. And v-show just display: none. Another thing, can't use v-else with v-show -->
@@ -174,6 +177,11 @@
           // },
           getMenu: function (data) {
             return (this.menu = data);
+          },
+          updateKelas: function (event) {
+            let update = event.target.value;
+            this.kelas.push(update);
+            event.target.value = "";
           },
         },
         // Computed property, nilai properti tergantung pada properti lain. Contoh property qty pada marketplace
