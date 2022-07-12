@@ -24,15 +24,7 @@
     <div id="app">
       <header-component></header-component>
       <main>
-        <label for="update kelas">Please, add class here</label>
-        <p><input type="text" v-on:keyup.enter="updateKelas" v-model="kelasBaru" /></p>
-        <h3>Daftar kelas {{kelas.length}}</h3>
-        <template v-if="kelas.length > 0">
-          <ul>
-            <li v-for="(x, index) in kelas">{{index+1}} - {{x}}</li>
-          </ul>
-        </template>
-        <li v-else>Class is not available</li>
+        <kelas />
       </main>
       <footer-component></footer-component>
     </div>
@@ -57,11 +49,25 @@
           <p>Copyright 2022. Zaenury Adhiim</p>
         </footer>`,
       });
-      const vm = new Vue({
-        el: "#app",
-        data: {
-          kelas: [],
-          kelasBaru: "",
+      Vue.component("kelas", {
+        template: `
+        <div>
+          <label for="update kelas">Please, add class here</label>
+          <p><input type="text" v-on:keyup.enter="updateKelas" v-model="kelasBaru" /></p>
+          <h3>Daftar kelas {{kelas.length}}</h3>
+          <template v-if="kelas.length > 0">
+            <ul>
+              <li v-for="(x, index) in kelas">{{index+1}} - {{x}}</li>
+            </ul>
+          </template>
+          <li v-else>Class is not available</li>
+        </div>
+        `,
+        data: function () {
+          return {
+            kelas: [],
+            kelasBaru: "",
+          };
         },
         methods: {
           updateKelas: function () {
@@ -70,6 +76,11 @@
             this.kelasBaru = "";
           },
         },
+      });
+      const vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
         computed: {},
       });
     </script>
