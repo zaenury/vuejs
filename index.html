@@ -31,6 +31,11 @@
         <h2>{{anotherName}}</h2>
         <!-- v-model is two way data binding. So we can change value what we declared on data of vuejs -->
         <p><input type="text" v-model="anotherName" /></p>
+        <template v-for="(value, key, index) in mahasiswa">
+          <ul>
+            <li>{{index+1}}. {{key}}: {{value}}</li>
+          </ul>
+        </template>
         <!-- switching the loginType in the code below will not erase what the user has already entered. Since both templates use the same elements, the <input> is not replaced - just its placeholder. To resolve this way, we can use key attribute with unique values -->
         <template v-if="loginType">
           <label>Username </label>
@@ -125,6 +130,11 @@
           kelas: [],
           numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
           loginType: true,
+          mahasiswa: {
+            name: "Dodik Seti",
+            prodi: "Teknik Informatika",
+            district: "Jember",
+          },
         },
         // Method JavaScript
         methods: {
