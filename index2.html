@@ -22,7 +22,8 @@
   </head>
   <body>
     <div id="app">
-      <header-component></header-component>
+      <!-- Apply props to component -->
+      <header-component name="Vuejs" image="image/logo.svg"></header-component>
       <main>
         <kelas />
       </main>
@@ -31,10 +32,12 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
     <script>
       Vue.component("header-component", {
+        // Adding props
+        props: ["name", "image"],
         template: `
         <header>
-          <img src="image/logo.svg" width="90" />
-          <p v-text="pesan"></p>
+          <img :src="image" width="90" />
+          <p>Halo, {{name}}</p>
         </header>`,
         // Data component must be function
         data: function () {
