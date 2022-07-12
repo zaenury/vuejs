@@ -31,6 +31,18 @@
         <h2>{{anotherName}}</h2>
         <!-- v-model is two way data binding. So we can change value what we declared on data of vuejs -->
         <p><input type="text" v-model="anotherName" /></p>
+        <!-- switching the loginType in the code below will not erase what the user has already entered. Since both templates use the same elements, the <input> is not replaced - just its placeholder. To resolve this way, we can use key attribute with unique values -->
+        <template v-if="loginType">
+          <label>Username </label>
+          <input type="text" placeholder="Please input username" key="input-username" />
+        </template>
+        <template v-else>
+          <label>Email </label>
+          <input type="text" placeholder="Please input email" key="input-email" />
+        </template>
+        <p>
+          <button @click="changeMethodLogin()">Click</button>
+        </p>
         <h3>Iterasi v-for (1-5)</h3>
         <ul>
           <li v-for="x in 5">{{x}}</li>
@@ -112,6 +124,7 @@
           menu: "home",
           kelas: [],
           numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          loginType: true,
         },
         // Method JavaScript
         methods: {
@@ -129,6 +142,9 @@
           },
           cariBilanganGenap: function (data) {
             return data.filter((angka) => angka % 2 == 0);
+          },
+          changeMethodLogin: function () {
+            return (this.loginType = !this.loginType);
           },
         },
         // Computed property, nilai properti tergantung pada properti lain. Contoh property qty pada marketplace
