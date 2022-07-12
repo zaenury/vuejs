@@ -24,13 +24,22 @@
     <div id="app">
       <!-- Apply props to component -->
       <header-component name="Vuejs" image="image/logo.svg"></header-component>
+      <header-compnonent name="Reactjs" image="image/vuejs.png"></header-compnonent>
       <main>
-        <kelas />
+        <kelas v-bind:matkul="kelas" v-bind:input="kelasBaru"></kelas>
+        <home></home>
       </main>
       <footer-component></footer-component>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
     <script>
+      // We have two options when defining component names. Kebab cas 'my-component-name' or PascalCase 'MyComponentName'
+      //  See https://v2.vuejs.org/v2/guide/components-registration.html#Name-Casing
+      // const Home is local registration components
+      const Home = {
+        template: `<div>Home</div>`,
+      };
+      // Global registration components
       Vue.component("header-component", {
         // Adding props
         props: ["name", "image"],
@@ -53,24 +62,22 @@
         </footer>`,
       });
       Vue.component("kelas", {
+        props: ["matkul", "input"],
         template: `
         <div>
           <label for="update kelas">Please, add class here</label>
-          <p><input type="text" v-on:keyup.enter="updateKelas" v-model="kelasBaru" /></p>
-          <h3>Daftar kelas {{kelas.length}}</h3>
-          <template v-if="kelas.length > 0">
+          <p><input type="text" v-on:keyup.enter="updateKelas" v-model="input" /></p>
+          <h3>Daftar kelas {{matkul.length}}</h3>
+          <template v-if="matkul.length > 0">
             <ul>
-              <li v-for="(x, index) in kelas">{{index+1}} - {{x}}</li>
+              <li v-for="(x, index) in matkul">{{index+1}} - {{x}}</li>
             </ul>
           </template>
           <li v-else>Class is not available</li>
         </div>
         `,
         data: function () {
-          return {
-            kelas: [],
-            kelasBaru: "",
-          };
+          return {};
         },
         methods: {
           updateKelas: function () {
@@ -82,7 +89,14 @@
       });
       const vm = new Vue({
         el: "#app",
-        data: {},
+        // Local registration components
+        components: {
+          home: Home,
+        },
+        data: {
+          kelas: [],
+          kelasBaru: "",
+        },
         methods: {},
         computed: {},
       });
