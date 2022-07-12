@@ -36,6 +36,7 @@
             <li>{{index+1}}. {{key}}: {{value}}</li>
           </ul>
         </template>
+        <p><button @click="greet">Greetings</button></p>
         <!-- switching the loginType in the code below will not erase what the user has already entered. Since both templates use the same elements, the <input> is not replaced - just its placeholder. To resolve this way, we can use key attribute with unique values -->
         <template v-if="loginType">
           <label>Username </label>
@@ -155,6 +156,13 @@
           },
           changeMethodLogin: function () {
             return (this.loginType = !this.loginType);
+          },
+          // Event
+          greet: function (event) {
+            alert("Hello Vuejs");
+            if (event) {
+              alert(event.target.tagName);
+            }
           },
         },
         // Computed property, nilai properti tergantung pada properti lain. Contoh property qty pada marketplace
