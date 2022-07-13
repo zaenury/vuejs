@@ -26,7 +26,9 @@
       <header-component name="Vuejs" image="image/logo.svg"></header-component>
       <header-compnonent name="Reactjs" image="image/vuejs.png"></header-compnonent>
       <main>
-        <kelas v-bind:matkul="kelas" v-bind:input="kelasBaru"></kelas>
+        <!-- emit is using for Listening to Child Components Events and communicating back up to the parent. So registration with v-on then  $emit('aim purpose') . And dont use camel case for aim puropose. I prefer for using kebab case -->
+        <!-- $emit('hapus-kelas', index) : use $emit‘s 2nd parameter to provide this value -->
+        <kelas v-bind:matkul="kelas" v-bind:input="kelasBaru" v-on:hapus-kelas="hapusKelas"></kelas>
         <home></home>
       </main>
       <footer-component></footer-component>
@@ -70,7 +72,9 @@
           <h3>Daftar kelas {{matkul.length}}</h3>
           <template v-if="matkul.length > 0">
             <ul>
-              <li v-for="(x, index) in matkul">{{index+1}} - {{x}}</li>
+              <li v-for="(x, index) in matkul">{{index+1}} - {{x}}
+                <a href="" v-on:click.prevent="$emit('hapus-kelas', index)">Hapus</a>  
+              </li>
             </ul>
           </template>
           <li v-else>Class is not available</li>
@@ -94,10 +98,15 @@
           home: Home,
         },
         data: {
-          kelas: [],
+          kelas: ["PHP", "CSS"],
           kelasBaru: "",
         },
-        methods: {},
+        methods: {
+          // splice is method for remove array
+          hapusKelas: function (index) {
+            this.kelas.splice(index, 1);
+          },
+        },
         computed: {},
       });
     </script>
