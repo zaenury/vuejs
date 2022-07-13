@@ -30,7 +30,10 @@
         <kelas v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></kelas>
         <home></home>
       </main>
-      <footer-component></footer-component>
+      <footer-component>
+        <!-- <slot> is using to include something that is inside the class tag -->
+        <p>Copyright 2022. Zaenury Adhiim</p>
+      </footer-component>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
     <script>
@@ -59,7 +62,7 @@
       Vue.component("footer-component", {
         template: `
         <footer id="footer">
-          <p>Copyright 2022. Zaenury Adhiim</p>
+          <slot></slot>
         </footer>`,
       });
       Vue.component("kelas", {
