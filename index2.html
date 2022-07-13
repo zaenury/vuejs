@@ -24,11 +24,10 @@
     <div id="app">
       <!-- Apply props to component -->
       <header-component name="Vuejs" image="image/logo.svg"></header-component>
-      <header-compnonent name="Reactjs" image="image/vuejs.png"></header-compnonent>
       <main>
         <!-- emit is using for Listening to Child Components Events and communicating back up to the parent. So registration with v-on then  $emit('aim purpose') . And dont use camel case for aim puropose. I prefer for using kebab case -->
         <!-- $emit('hapus-kelas', index) : use $emit‘s 2nd parameter to provide this value -->
-        <kelas v-bind:matkul="kelas" v-bind:input="kelasBaru" v-on:hapus-kelas="hapusKelas"></kelas>
+        <kelas v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></kelas>
         <home></home>
       </main>
       <footer-component></footer-component>
@@ -64,11 +63,11 @@
         </footer>`,
       });
       Vue.component("kelas", {
-        props: ["matkul", "input"],
+        props: ["matkul"],
         template: `
         <div>
           <label for="update kelas">Please, add class here</label>
-          <p><input type="text" v-on:keyup.enter="updateKelas" v-model="input" /></p>
+          <p><input type="text" v-on:keyup.enter="$emit('update-kelas', $event)" /></p>
           <h3>Daftar kelas {{matkul.length}}</h3>
           <template v-if="matkul.length > 0">
             <ul>
@@ -83,13 +82,6 @@
         data: function () {
           return {};
         },
-        methods: {
-          updateKelas: function () {
-            // .unshift is fill an array to the first of index
-            this.kelas.unshift(this.kelasBaru);
-            this.kelasBaru = "";
-          },
-        },
       });
       const vm = new Vue({
         el: "#app",
@@ -99,12 +91,16 @@
         },
         data: {
           kelas: ["PHP", "CSS"],
-          kelasBaru: "",
         },
         methods: {
           // splice is method for remove array
           hapusKelas: function (index) {
             this.kelas.splice(index, 1);
+          },
+          updateKelas: function (event) {
+            const tambah = event.target.value;
+            this.kelas.unshift(tambah);
+            event.target.value = "";
           },
         },
         computed: {},
