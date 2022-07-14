@@ -61,8 +61,8 @@
           <h3>Daftar kelas {{matkul.length}}</h3>
           <template v-if="matkul.length > 0">
             <ul>
-              <li v-for="(x, index) in matkul">{{index+1}} - {{x}}
-                <a href="" v-on:click.prevent="$emit('hapus-kelas', index)">Hapus</a>  
+              <li v-for="(item, index) in matkul">{{index+1}} - {{item.title}}
+                <a href="" v-on:click.prevent="$emit('hapus-kelas', item.id)">Hapus</a>  
               </li>
             </ul>
           </template>
@@ -118,12 +118,18 @@
           home: Home,
         },
         data: {
-          kelas: ["PHP", "CSS"],
+          kelas: [
+            //  Try to change array string with array object
+            { id: "1", title: "javascript", description: "this is javascript" },
+            { id: "2", title: "typescript", description: "this is typescript" },
+            { id: "3", title: "golang", description: "this is golang" },
+          ],
         },
         methods: {
           // splice is method for remove array
-          hapusKelas: function (index) {
-            this.kelas.splice(index, 1);
+          hapusKelas: function (id) {
+            // Another alternative from .splice(index)
+            this.kelas = this.kelas.filter((item) => item.id != id);
           },
           updateKelas: function (event) {
             const tambah = event.target.value;
