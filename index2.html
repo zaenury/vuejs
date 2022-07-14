@@ -24,11 +24,15 @@
     <div id="app">
       <!-- Apply props to component -->
       <header-component name="Vuejs" image="image/logo.svg"></header-component>
+      <router-link to="/">Home</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/kelas">Kelas</router-link>
       <main>
         <!-- emit is using for Listening to Child Components Events and communicating back up to the parent. So registration with v-on then  $emit('aim purpose') . And dont use camel case for aim puropose. I prefer for using kebab case -->
         <!-- $emit('hapus-kelas', index) : use $emit‘s 2nd parameter to provide this value -->
-        <kelas v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></kelas>
-        <home></home>
+        <!-- <kelas v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></kelas>
+        <home></home> -->
+        <router-view v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></router-view>
       </main>
       <footer-component>
         <!-- <slot> is using to include something that is inside the class tag -->
@@ -36,12 +40,38 @@
       </footer-component>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
     <script>
       // We have two options when defining component names. Kebab cas 'my-component-name' or PascalCase 'MyComponentName'
       //  See https://v2.vuejs.org/v2/guide/components-registration.html#Name-Casing
       // const Home is local registration components
+      // 1. Define route components.
       const Home = {
         template: `<div>Home</div>`,
+      };
+      const About = {
+        template: `<div>About</div>`,
+      };
+      const Kelas = {
+        props: ["matkul"],
+        template: `
+        <div>
+          <label for="update kelas">Please, add class here</label>
+          <p><input type="text" v-on:keyup.enter="$emit('update-kelas', $event)" /></p>
+          <h3>Daftar kelas {{matkul.length}}</h3>
+          <template v-if="matkul.length > 0">
+            <ul>
+              <li v-for="(x, index) in matkul">{{index+1}} - {{x}}
+                <a href="" v-on:click.prevent="$emit('hapus-kelas', index)">Hapus</a>  
+              </li>
+            </ul>
+          </template>
+          <li v-else>Class is not available</li>
+        </div>
+        `,
+        data: function () {
+          return {};
+        },
       };
       // Global registration components
       Vue.component("header-component", {
@@ -65,29 +95,23 @@
           <slot></slot>
         </footer>`,
       });
-      Vue.component("kelas", {
-        props: ["matkul"],
-        template: `
-        <div>
-          <label for="update kelas">Please, add class here</label>
-          <p><input type="text" v-on:keyup.enter="$emit('update-kelas', $event)" /></p>
-          <h3>Daftar kelas {{matkul.length}}</h3>
-          <template v-if="matkul.length > 0">
-            <ul>
-              <li v-for="(x, index) in matkul">{{index+1}} - {{x}}
-                <a href="" v-on:click.prevent="$emit('hapus-kelas', index)">Hapus</a>  
-              </li>
-            </ul>
-          </template>
-          <li v-else>Class is not available</li>
-        </div>
-        `,
-        data: function () {
-          return {};
-        },
+      Vue.component("kelas", {});
+
+      // 2. Define some routes
+      const routes = [
+        { path: "/", component: Home },
+        { path: "/about", component: About },
+        { path: "/kelas", component: Kelas },
+      ];
+
+      // 3. Create the router instance and pass the `routes` option
+      const router = new VueRouter({
+        routes, // short for `routes: routes`
       });
+
       const vm = new Vue({
         el: "#app",
+        router,
         // Local registration components
         components: {
           home: Home,
