@@ -22,189 +22,116 @@
   </head>
   <body>
     <div id="app">
-      <header>
-        <img src="image/logo.svg" width="90" />
-        <!-- {{}}  is Binding Expression / Interpolation / Syntax Template.-->
-        <!-- v-once adalah directive yang digunakan agar Binding Expression di dalamnya tidak bisa diubah.  -->
-        <!-- .toUpperCase is JavaScript Expression -->
-        <h1 v-once>Hey {{name.toUpperCase()}}! What is Vue.js</h1>
-        <h2>{{anotherName}}</h2>
-        <!-- v-model is two way data binding. So we can change value what we declared on data of vuejs -->
-        <p><input type="text" v-model="anotherName" /></p>
-        <template v-for="(value, key, index) in mahasiswa">
-          <ul>
-            <li>{{index+1}}. {{key}}: {{value}}</li>
-          </ul>
-        </template>
-        <p><button @click="greet">Greetings</button></p>
-        <!-- switching the loginType in the code below will not erase what the user has already entered. Since both templates use the same elements, the <input> is not replaced - just its placeholder. To resolve this way, we can use key attribute with unique values -->
-        <template v-if="loginType">
-          <label>Username </label>
-          <input type="text" placeholder="Please input username" key="input-username" />
-        </template>
-        <template v-else>
-          <label>Email </label>
-          <input type="text" placeholder="Please input email" key="input-email" />
-        </template>
-        <p>
-          <button @click="changeMethodLogin()">Click</button>
-        </p>
-        <h3>Iterasi v-for (1-5)</h3>
-        <ul>
-          <li v-for="x in 5">{{x}}</li>
-        </ul>
-        <h3>Cari Bilangan genap dari {{numbers}}</h3>
-        <ul>
-          <!-- Function can be use inside v-for -->
-          <li v-for="x in cariBilanganGenap(numbers)">{{x}}</li>
-        </ul>
-        <label for="update kelas">Please, add class here</label>
-        <!-- Using Key Modifier with .enter to run updateKelas without () -->
-        <p><input type="text" v-on:keyup.enter="updateKelas" v-model="kelasBaru" /></p>
-        <h3>Daftar kelas {{kelas.length}}</h3>
-        <!-- Conditional Rendering with v-if -->
-        <!-- We can use v-show like v-if. But v-if totally remove elements. And v-show just display: none. Another thing, can't use v-else with v-show -->
-        <!-- Because v-if is a directive, it has to be attached to a single element. But what if we want to toggle more than one element? In this case we can use v-if on a <template> element, which serves as an invisible wrapper.  -->
-        <template v-if="kelas.length > 0">
-          <ul>
-            <!-- v=for is iteartion. we can write with in or of-->
-            <!-- <li v-for="item in kelas">{{item}}</li> -->
-            <!-- Another alternative from {{}} is Binding Expression, we can use v-text for showing text -->
-            <!-- <li v-for="item in kelas" v-text="item"></li> -->
-            <!-- Access index from iteration -->
-            <li v-for="(x, index) in kelas">{{index+1}} - {{x}}</li>
-          </ul>
-        </template>
-        <!-- v-else must be sibling with v-if. And dont sparate with another tag <div></div> -->
-        <li v-else>Class is not available</li>
-        <p><input type="checkbox" value="Vuejs" v-model="kelas" />Vuejs <input type="checkbox" value="Reactjs" v-model="kelas" />Reactjs <input type="checkbox" value="Nextjs" v-model="kelas" />Nextjs</p>
-        <p>{{kelas}}</p>
-        <!-- How to call image (1) <img src="image/vuejs.png" alt="gambar" width="500" /> -->
-        <!-- Cannot use binding like this <img src="{{gambar}}" alt="gambar" width="500" /> -->
-        <!-- Another step tu call image (2) <img v-bind:src="gambar" alt="gambar" width="500" /> -->
-        <!-- Shortcut from v-bind:src is :src. .No need () -->
-        <img :src="gambar" alt="gambar" width="500" />
-        <p>{{ bilangan}}</p>
-        <p>
-          <!-- v-on:click is an events javascript. addBilangan is handle. and it is mehtod what we declared bellow->
-          <!-- @click same shorthand from  v-on:click. We can do another like this with @doubleClick. @input. @onSubmit. dll -->
-          <button @click="addBilangan()">Tekan</button>
-        </p>
-        <p>
-          <!-- $event is access the original DOM event in an inline statement handler -->
-          <!-- <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click="getMenu('home', $event)">Home</a> -->
-          <!-- With event modifier. ex: .prevent, we dont need put $event & declare event.preventDefault() in method anymore -->
-          <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click.prevent="getMenu('home')">Home</a>
-          <a v-bind:class="{active: menu === 'about'}" href="#" v-on:click.prevent="getMenu('about')">About</a>
-          <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click.prevent="getMenu('blog')">Blog</a>
-        </p>
-        <!-- When call function(parameter). so we must filling something inside to () -->
-        <h2>{{changeName("Musyafa")}}</h2>
-        <!-- Implementation from computed property. call it like function but without using () -->
-        <h3>{{getCompleteName}} {{totalPayment}}</h3>
-        <!-- Call ternary operator on computed property -->
-        <h4>{{bilangan + isBilanganAsli}}</h4>
-        <!-- Implement directive v-text from vuejs and call property "message" -->
-        <h5 v-text="message"></h5>
-        <!-- Implement directive v-html from vuejs and call property "link " -->
-        <h5 v-html="link"></h5>
-        <!--  {{isActive ? "is super" : "not super"}} is Javascript Expression. if true will show "is super",  if false will show "not super" -->
-        <!-- {{getName()}} is calling declaration method -->
-        <p>The progressive JavaScript Framework {{isActive ? "is super" : "not super"}} {{getName()}}</p>
-      </header>
-      <footer id="footer">
-        <!--  {{"20" + "22"}}  JavaScript Expression, Whetere string or int or another type-->
-        <p>Copyright {{"20" + "22"}}</p>
-      </footer>
+      <!-- Apply props to component -->
+      <header-component name="Vuejs" image="image/logo.svg"></header-component>
+      <router-link to="/">Home</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/kelas">Kelas</router-link>
+      <main>
+        <!-- emit is using for Listening to Child Components Events and communicating back up to the parent. So registration with v-on then  $emit('aim purpose') . And dont use camel case for aim puropose. I prefer for using kebab case -->
+        <!-- $emit('hapus-kelas', index) : use $emit‘s 2nd parameter to provide this value -->
+        <!-- <kelas v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></kelas>
+        <home></home> -->
+        <router-view v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></router-view>
+      </main>
+      <footer-component>
+        <!-- <slot> is using to include something that is inside the class tag -->
+        <p>Copyright 2022. Zaenury Adhiim</p>
+      </footer-component>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
     <script>
+      // We have two options when defining component names. Kebab cas 'my-component-name' or PascalCase 'MyComponentName'
+      //  See https://v2.vuejs.org/v2/guide/components-registration.html#Name-Casing
+      // const Home is local registration components
+      // 1. Define route components.
+      const Home = {
+        template: `<div>Home</div>`,
+      };
+      const About = {
+        template: `<div>About</div>`,
+      };
+      const Kelas = {
+        props: ["matkul"],
+        template: `
+        <div>
+          <label for="update kelas">Please, add class here</label>
+          <p><input type="text" v-on:keyup.enter="$emit('update-kelas', $event)" /></p>
+          <h3>Daftar kelas {{matkul.length}}</h3>
+          <template v-if="matkul.length > 0">
+            <ul>
+              <li v-for="(x, index) in matkul">{{index+1}} - {{x}}
+                <a href="" v-on:click.prevent="$emit('hapus-kelas', index)">Hapus</a>  
+              </li>
+            </ul>
+          </template>
+          <li v-else>Class is not available</li>
+        </div>
+        `,
+        data: function () {
+          return {};
+        },
+      };
+      // Global registration components
+      Vue.component("header-component", {
+        // Adding props
+        props: ["name", "image"],
+        template: `
+        <header>
+          <img :src="image" width="90" />
+          <p>Halo, {{name}}</p>
+        </header>`,
+        // Data component must be function
+        data: function () {
+          return {
+            pesan: "Hello Vuejs",
+          };
+        },
+      });
+      Vue.component("footer-component", {
+        template: `
+        <footer id="footer">
+          <slot></slot>
+        </footer>`,
+      });
+      Vue.component("kelas", {});
+
+      // 2. Define some routes
+      const routes = [
+        { path: "/", component: Home },
+        { path: "/about", component: About },
+        { path: "/kelas", component: Kelas },
+      ];
+
+      // 3. Create the router instance and pass the `routes` option
+      const router = new VueRouter({
+        mode: "history",
+        routes, // short for `routes: routes`
+      });
+
       const vm = new Vue({
         el: "#app",
+        router,
+        // Local registration components
+        components: {
+          home: Home,
+        },
         data: {
-          // String, number, boolean, array, object
-          name: "Zaenury Adhiim",
-          anotherName: "Zentzy",
-          message: "Hello World",
-          isActive: true,
-          namaDepan: "Rain",
-          namaBelakang: "Fallin",
-          qty: 1,
-          bilangan: 0,
-          link: '<a href="">Ini contoh html</a>',
-          gambar: "image/vuejs.png",
-          menu: "home",
-          kelas: [],
-          numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-          loginType: true,
-          mahasiswa: {
-            name: "Dodik Seti",
-            prodi: "Teknik Informatika",
-            district: "Jember",
-          },
-          kelasBaru: "",
+          kelas: ["PHP", "CSS"],
         },
-        // Method JavaScript
         methods: {
-          getName: function () {
-            return "Ya, " + this.name;
+          // splice is method for remove array
+          hapusKelas: function (index) {
+            this.kelas.splice(index, 1);
           },
-          // function (newName) is Parameter from function
-          changeName: function (newName) {
-            this.name = newName;
-            return this.getName();
-          },
-          addBilangan: function () {
-            this.bilangan++;
-            this.bilangan % 2 === 0 ? (this.gambar = "image/vuejs.png") : (this.gambar = "image/vuejs2.png");
-          },
-          cariBilanganGenap: function (data) {
-            return data.filter((angka) => angka % 2 == 0);
-          },
-          changeMethodLogin: function () {
-            return (this.loginType = !this.loginType);
-          },
-          // Event
-          greet: function (event) {
-            alert("Hello Vuejs");
-            if (event) {
-              alert(event.target.tagName);
-            }
-          },
-          // getMenu: function (data, event) {
-          //   // Event modifiers
-          //   event.preventDefault();
-          //   return (this.menu = data);
-          // },
-          getMenu: function (data) {
-            return (this.menu = data);
-          },
-          // updateKelas: function (event) {
-          //   let update = event.target.value;
-          // .push is fill an array to the last of index
-          //   this.kelas.push(update);
-          //   event.target.value = "";
-          // },
-          // another way for updateKelas
-          updateKelas: function () {
-            // .unshift is fill an array to the first of index
-            this.kelas.unshift(this.kelasBaru);
-            this.kelasBaru = "";
+          updateKelas: function (event) {
+            const tambah = event.target.value;
+            this.kelas.unshift(tambah);
+            event.target.value = "";
           },
         },
-        // Computed property, nilai properti tergantung pada properti lain. Contoh property qty pada marketplace
-        computed: {
-          totalPayment: function () {
-            return this.qty * 10000;
-          },
-          getCompleteName: function () {
-            return this.namaDepan + this.namaBelakang;
-          },
-          // try computed with ternary operator
-          isBilanganAsli: function () {
-            return this.bilangan % 2 === 0 ? " Adalah bilangan genap" : " Adalah bilangan ganjil";
-          },
-        },
+        computed: {},
       });
     </script>
   </body>
