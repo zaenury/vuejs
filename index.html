@@ -49,6 +49,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
     <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
       // We have two options when defining component names. Kebab cas 'my-component-name' or PascalCase 'MyComponentName'
       //  See https://v2.vuejs.org/v2/guide/components-registration.html#Name-Casing
@@ -220,8 +221,14 @@
           updateKelas: function (data) {
             // unshift (input 1st data to array object)
             this.kelas.unshift(data);
+            console.log(data);
             // set local storage. local storage cannot read object in array. so we use json string with syntax JSON.stringify()
             localStorage.setItem("kelas", JSON.stringify(this.kelas));
+            swal({
+              title: data.title,
+              text: "Data kelas berhasil disimpan",
+              icon: "success",
+            });
           },
         },
         computed: {},
