@@ -217,13 +217,19 @@
           hapusKelas: function (id) {
             // Another alternative from .splice(index)
             this.kelas = this.kelas.filter((item) => item.id != id);
+            localStorage.setItem("kelas", JSON.stringify(this.kelas));
+            //sweet alert
+            swal({
+              text: "Data kelas berhasil dihapus",
+              icon: "warning",
+            });
           },
           updateKelas: function (data) {
             // unshift (input 1st data to array object)
             this.kelas.unshift(data);
-            console.log(data);
             // set local storage. local storage cannot read object in array. so we use json string with syntax JSON.stringify()
             localStorage.setItem("kelas", JSON.stringify(this.kelas));
+            //sweet alert
             swal({
               title: data.title,
               text: "Data kelas berhasil disimpan",
