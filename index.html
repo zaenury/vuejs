@@ -76,8 +76,12 @@
           <h3>Daftar kelas {{matkul.length}}</h3>
           <template v-if="matkul.length > 0">
             <ul>
-              <li v-for="(item, index) in matkul">{{index+1}} - {{item.title}}
+              <li v-for="(item, index) in matkul">
+                <img :src="'image/' + item.image" width="200"/>
+                <p>
+                {{index+1}} - {{item.title}}
                 <a href="" v-on:click.prevent="$emit('hapus-kelas', item.id)">Hapus</a>  
+                </p>
               </li>
             </ul>
           </template>
@@ -166,9 +170,9 @@
         data: {
           kelas: [
             //  Try to change array string with array object
-            { id: "1", title: "javascript", description: "this is javascript" },
-            { id: "2", title: "typescript", description: "this is typescript" },
-            { id: "3", title: "golang", description: "this is golang" },
+            { id: "1", title: "javascript", description: "this is javascript", image: "/logo.svg" },
+            { id: "2", title: "typescript", description: "this is typescript", image: "/vuejs.png" },
+            { id: "3", title: "golang", description: "this is golang", image: "/vuejs.png" },
           ],
         },
         methods: {
