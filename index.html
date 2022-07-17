@@ -78,6 +78,7 @@
             <div class="input-grup">
               <label>Input descriptions</label>
               <div><textarea v-model="kelas.description"></textarea></div>
+              <div class="error" v-if="error.description"><small>{{error.description}}</small></div>
             </div>
             <div class="input-grup">
               <p><img :src="preview" v-if="preview" width="200"/></p>
@@ -118,24 +119,31 @@
         },
         methods: {
           updateKelas: function () {
+            this.error.title = "";
+            this.error.description = "";
             // Don't use required html, it can be edited via inspect element
             if (this.kelas.title == "") {
               this.error.title = "Title is required";
             }
-            const updateKelas = {
-              id: uuidv4(),
-              title: this.kelas.title,
-              description: this.kelas.description,
-              image: this.kelas.image,
-            };
-            // this.$emit = Communication from child to parent. "update-kelas" = custom name function. updateKelas = bring value of objects
-            this.$emit("update-kelas", updateKelas);
-            this.kelas.title = "";
-            this.kelas.description = "";
-            this.kelas.image = "";
-            this.preview = "";
-            // to remove imageName beside of button `choose file`
-            this.$refs.image.value = "";
+            if (this.kelas.description == "") {
+              this.error.description = "Description is required";
+            }
+            if (this.kelas.title && this.kelas.description) {
+              const updateKelas = {
+                id: uuidv4(),
+                title: this.kelas.title,
+                description: this.kelas.description,
+                image: this.kelas.image,
+              };
+              // this.$emit = Communication from child to parent. "update-kelas" = custom name function. updateKelas = bring value of objects
+              this.$emit("update-kelas", updateKelas);
+              this.kelas.title = "";
+              this.kelas.description = "";
+              this.kelas.image = "";
+              this.preview = "";
+              // to remove imageName beside of button `choose file`
+              this.$refs.image.value = "";
+            }
           },
           uploadImage: function (event) {
             imageName = event.target.files[0].name;
