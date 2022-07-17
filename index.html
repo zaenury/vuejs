@@ -66,8 +66,9 @@
               <p><textarea v-model="kelas.description"></textarea></p>
             </div>
             <div class="input-grup">
-              <label>Upload Text</label>
-              <input type="file"></input>
+              <p><img :src="preview" v-if="preview" width="200"/></p>
+              <label>Upload Image</label>
+              <input type="file" v-on:change="uploadImage"></input>
             </div>
             <p><button type="submit">Submit</submit></p>
           </form>
@@ -90,6 +91,7 @@
               description: "",
               image: "",
             },
+            preview: "",
           };
         },
         methods: {
@@ -98,12 +100,18 @@
               id: uuidv4(),
               title: this.kelas.title,
               description: this.kelas.description,
-              image: null,
+              image: this.kelas.image,
             };
             // this.$emit = Communication from child to parent. "update-kelas" = custom name function. updateKelas = bring value of objects
             this.$emit("update-kelas", updateKelas);
             this.kelas.title = "";
             this.kelas.description = "";
+          },
+          uploadImage: function (event) {
+            imageName = event.target.files[0].name;
+            this.kelas.image = imageName;
+            // URL.createObjectURL (for change data files object to url)
+            this.preview = URL.createObjectURL(event.target.files[0]);
           },
         },
       };
