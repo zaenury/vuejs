@@ -32,6 +32,7 @@
         <!-- $emit('hapus-kelas', index) : use $emit‘s 2nd parameter to provide this value -->
         <!-- <kelas v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></kelas>
         <home></home> -->
+        <!-- matkul (props), update-kelas ($emit), hapus-kelas ($emit) are custom name function and embed to parent -->
         <router-view v-bind:matkul="kelas" v-on:update-kelas="updateKelas" v-on:hapus-kelas="hapusKelas"></router-view>
       </main>
       <footer-component>
@@ -41,6 +42,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.0"></script>
     <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script>
       // We have two options when defining component names. Kebab cas 'my-component-name' or PascalCase 'MyComponentName'
       //  See https://v2.vuejs.org/v2/guide/components-registration.html#Name-Casing
@@ -57,7 +59,19 @@
         template: `
         <div>
           <label for="update kelas">Please, add class here</label>
-          <p><input type="text" v-on:keyup.enter="$emit('update-kelas', $event)" /></p>
+          <form v-on:submit.prevent="updateKelas">
+            <p><input type="text" placeholder="Input title" v-model="kelas.title"></input></p>
+            <div class="input-grup">
+              <label>Input descriptions</label>
+              <p><textarea v-model="kelas.description"></textarea></p>
+            </div>
+            <div class="input-grup">
+              <label>Upload Text</label>
+              <input type="file"></input>
+            </div>
+            <p><button type="submit">Submit</submit></p>
+          </form>
+
           <h3>Daftar kelas {{matkul.length}}</h3>
           <template v-if="matkul.length > 0">
             <ul>
@@ -70,7 +84,27 @@
         </div>
         `,
         data: function () {
-          return {};
+          return {
+            kelas: {
+              title: "",
+              description: "",
+              image: "",
+            },
+          };
+        },
+        methods: {
+          updateKelas: function () {
+            const updateKelas = {
+              id: uuidv4(),
+              title: this.kelas.title,
+              description: this.kelas.description,
+              image: null,
+            };
+            // this.$emit = Communication from child to parent. "update-kelas" = custom name function. updateKelas = bring value of objects
+            this.$emit("update-kelas", updateKelas);
+            this.kelas.title = "";
+            this.kelas.description = "";
+          },
         },
       };
       // Global registration components
@@ -131,10 +165,9 @@
             // Another alternative from .splice(index)
             this.kelas = this.kelas.filter((item) => item.id != id);
           },
-          updateKelas: function (event) {
-            const tambah = event.target.value;
-            this.kelas.unshift(tambah);
-            event.target.value = "";
+          updateKelas: function (data) {
+            // unshift (input 1st data to array object)
+            this.kelas.unshift(data);
           },
         },
         computed: {},
