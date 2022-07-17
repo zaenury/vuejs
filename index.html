@@ -18,6 +18,12 @@
         border: 0;
         padding: 5px;
       }
+      .error {
+        color: red;
+      }
+      .input-grup {
+        margin-bottom: 5px;
+      }
     </style>
   </head>
   <body>
@@ -63,17 +69,20 @@
         props: ["matkul"],
         template: `
         <div>
-          <label for="update kelas">Please, add class here</label>
+          <h3>Update Kelas</h3>
           <form v-on:submit.prevent="updateKelas">
-            <p><input type="text" placeholder="Input title" v-model="kelas.title"></input></p>
+            <div class="input-grup">
+              <input type="text" placeholder="Input title" v-model="kelas.title"></input>
+              <div class="error" v-if="error.title"><small>{{error.title}}</small></div>
+              </div>
             <div class="input-grup">
               <label>Input descriptions</label>
-              <p><textarea v-model="kelas.description"></textarea></p>
+              <div><textarea v-model="kelas.description"></textarea></div>
             </div>
             <div class="input-grup">
               <p><img :src="preview" v-if="preview" width="200"/></p>
               <label>Upload Image</label>
-              <input type="file" ref="image" v-on:change="uploadImage"></input>
+              <p><input type="file" ref="image" v-on:change="uploadImage"></input></p>
             </div>
             <p><button type="submit">Submit</submit></p>
           </form>
@@ -85,7 +94,7 @@
                 <img :src="'image/' + item.image" width="200"/>
                 <p>
                 {{index+1}} - {{item.title}}
-                <a href="" v-on:click.prevent="$emit('hapus-kelas', item.id)">Hapus</a>  
+                <a href="" v-on:click.prevent="$emit('hapus-kelas', item.id)">Hapus</a>
                 </p>
               </li>
             </ul>
@@ -101,10 +110,18 @@
               image: "",
             },
             preview: "",
+            error: {
+              title: "",
+              description: "",
+            },
           };
         },
         methods: {
           updateKelas: function () {
+            // Don't use required html, it can be edited via inspect element
+            if (this.kelas.title == "") {
+              this.error.title = "Title is required";
+            }
             const updateKelas = {
               id: uuidv4(),
               title: this.kelas.title,
