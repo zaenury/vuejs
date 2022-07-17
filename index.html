@@ -215,6 +215,8 @@
           updateKelas: function (data) {
             // unshift (input 1st data to array object)
             this.kelas.unshift(data);
+            // save to local storage. local storage cannot read object in array. so we use json string with syntax JSON.stringify()
+            localStorage.setItem("Kelas", JSON.stringify(this.kelas));
           },
         },
         computed: {},
