@@ -199,12 +199,17 @@
           home: Home,
         },
         data: {
-          kelas: [
-            //  Try to change array string with array object
-            { id: "1", title: "javascript", description: "this is javascript", image: "/logo.svg" },
-            { id: "2", title: "typescript", description: "this is typescript", image: "/vuejs.png" },
-            { id: "3", title: "golang", description: "this is golang", image: "/vuejs.png" },
-          ],
+          // kelas: [
+          //   //  Try to change array string with array object
+          //   { id: "1", title: "javascript", description: "this is javascript", image: "/logo.svg" },
+          //   { id: "2", title: "typescript", description: "this is typescript", image: "/vuejs.png" },
+          //   { id: "3", title: "golang", description: "this is golang", image: "/vuejs.png" },
+          // ],
+          kelas: [],
+        },
+        created() {
+          // get local storage. JSON.parse: json string to object
+          this.kelas = JSON.parse(localStorage.getItem("kelas")) || [];
         },
         methods: {
           // splice is method for remove array
@@ -215,8 +220,8 @@
           updateKelas: function (data) {
             // unshift (input 1st data to array object)
             this.kelas.unshift(data);
-            // save to local storage. local storage cannot read object in array. so we use json string with syntax JSON.stringify()
-            localStorage.setItem("Kelas", JSON.stringify(this.kelas));
+            // set local storage. local storage cannot read object in array. so we use json string with syntax JSON.stringify()
+            localStorage.setItem("kelas", JSON.stringify(this.kelas));
           },
         },
         computed: {},
