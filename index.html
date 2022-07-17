@@ -68,7 +68,7 @@
             <div class="input-grup">
               <p><img :src="preview" v-if="preview" width="200"/></p>
               <label>Upload Image</label>
-              <input type="file" v-on:change="uploadImage"></input>
+              <input type="file" ref="image" v-on:change="uploadImage"></input>
             </div>
             <p><button type="submit">Submit</submit></p>
           </form>
@@ -106,7 +106,10 @@
             this.$emit("update-kelas", updateKelas);
             this.kelas.title = "";
             this.kelas.description = "";
+            this.kelas.image = "";
             this.preview = "";
+            // to remove imageName beside of button `choose file`
+            this.$refs.image.value = "";
           },
           uploadImage: function (event) {
             imageName = event.target.files[0].name;
