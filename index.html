@@ -54,6 +54,11 @@
       const About = {
         template: `<div>About</div>`,
       };
+
+      const NotFound = {
+        template: `<div>Page is not found</div>`,
+      };
+
       const Kelas = {
         props: ["matkul"],
         template: `
@@ -152,6 +157,7 @@
         { path: "/", component: Home },
         { path: "/about", component: About },
         { path: "/kelas", component: Kelas },
+        { path: "*", component: NotFound },
       ];
 
       // 3. Create the router instance and pass the `routes` option
