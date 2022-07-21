@@ -208,9 +208,32 @@
           // ],
           kelas: [],
         },
+        // Lifecycle Diagram
+        beforeCreate() {
+          console.log("Before Create");
+        },
         created() {
           // get local storage. JSON.parse: json string to object
           this.kelas = JSON.parse(localStorage.getItem("kelas")) || [];
+          console.log("Created");
+        },
+        beforeMount() {
+          console.log("Before Mount");
+        },
+        mounted() {
+          console.log("Mounted");
+        },
+        beforeUpdate() {
+          console.log("Before Update");
+        },
+        updated() {
+          console.log("Updated");
+        },
+        beforeDestroy() {
+          console.log("Before Destroy");
+        },
+        destroyed() {
+          console.log("Destroyed");
         },
         methods: {
           // splice is method for remove array
