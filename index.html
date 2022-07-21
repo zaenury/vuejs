@@ -97,6 +97,7 @@
                 <p>
                 {{index+1}} - {{item.title}}
                 <a href="" v-on:click.prevent="$emit('hapus-kelas', item.id)">Hapus</a>
+                <router-link :to="'/kelas/' + item.id">Detail Kelas<router-link>
                 </p>
               </li>
             </ul>
@@ -154,6 +155,10 @@
           },
         },
       };
+
+      const DetailKelas = {
+        template: `<div>Hello Detail Kelas</div>`,
+      };
       // Global registration components
       Vue.component("header-component", {
         // Adding props
@@ -183,6 +188,7 @@
         { path: "/", component: Home },
         { path: "/about", component: About },
         { path: "/kelas", component: Kelas },
+        { path: "/kelas/:id", component: DetailKelas },
         { path: "*", component: NotFound },
       ];
 
