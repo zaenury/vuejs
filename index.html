@@ -193,7 +193,7 @@
       });
 
       const vm = new Vue({
-        el: "#app",
+        // el: "#app",
         router,
         // Local registration components
         components: {
@@ -262,6 +262,8 @@
         },
         computed: {},
       });
+      // another way from el: "#app",
+      vm.$mount("#app");
     </script>
   </body>
 </html>
