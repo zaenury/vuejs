@@ -50,6 +50,27 @@
     <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAb09K53pl0swTL0cJrk4TlBjs97g80mCg",
+        authDomain: "myvuejs-4b25e.firebaseapp.com",
+        projectId: "myvuejs-4b25e",
+        storageBucket: "myvuejs-4b25e.appspot.com",
+        messagingSenderId: "264399262947",
+        appId: "1:264399262947:web:eab9324fc1de905acb21d6",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
+
     <script>
       // We have two options when defining component names. Kebab cas 'my-component-name' or PascalCase 'MyComponentName'
       //  See https://v2.vuejs.org/v2/guide/components-registration.html#Name-Casing
