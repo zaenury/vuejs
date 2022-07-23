@@ -97,7 +97,7 @@
           <template v-if="matkul.length > 0">
             <ul>
               <li v-for="(item, index) in matkul">
-                <img :src="'image/' + item.image" width="200"/>
+                <img :src="urlImage(item.image)" width="200"/>
                 <p>
                 {{index+1}} - {{item.title}}
                 <a href="" v-on:click.prevent="$emit('hapus-kelas', item.id)">Hapus</a>
@@ -156,6 +156,9 @@
             this.kelas.image = imageName;
             // URL.createObjectURL (for change data files object to url)
             this.preview = URL.createObjectURL(event.target.files[0]);
+          },
+          urlImage: function (image) {
+            return "../image/" + image;
           },
         },
       };
