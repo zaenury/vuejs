@@ -67,7 +67,33 @@
       };
 
       const DetailKelas = {
-        template: `<div>Hello Detail Kelas</div>`,
+        template: `
+        <div>
+          <img :src="urlImage(detailkelas.image)" width="200"/>
+          <h3>{{detailkelas.title}} {{$route.params.idkelas}}</h3>
+          <p>{{detailkelas.description}}</p>
+          <router-link to="/kelas">Kembali</router-link>
+        </div>
+        `,
+        data() {
+          return {
+            detailkelas: {},
+          };
+        },
+        created() {
+          this.filterKelas();
+        },
+        methods: {
+          filterKelas: function () {
+            let kelas = JSON.parse(localStorage.getItem("kelas"));
+            let id = this.$route.params.idkelas;
+            let item = kelas.filter((k) => (k.id = id));
+            this.detailkelas = item[0];
+          },
+          urlImage: function (image) {
+            return "../image/" + image;
+          },
+        },
       };
 
       const Kelas = {
@@ -192,7 +218,7 @@
         { path: "/", component: Home },
         { path: "/about", component: About },
         { path: "/kelas", component: Kelas },
-        { path: "/kelas/:id", component: DetailKelas },
+        { path: "/kelas/:idkelas", component: DetailKelas },
         { path: "*", component: NotFound },
       ];
 
